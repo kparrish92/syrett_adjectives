@@ -1,0 +1,8 @@
+"0","library(here)"
+"0","library(tidyverse)"
+"0","task_2 = read.csv(here(""data"", ""tidy"", ""task_2_tidy.csv""))"
+"0",""
+"0","total_adjective_guesses = nrow(task_2 %>% filter(type == ""Adjective?"" & answers == 1))/nrow(task_2 %>% filter(type == ""Adjective?""))"
+"0",""
+"0","prop_emotional = nrow(task_2 %>% filter(type == ""Emotion Adj?-Conserv"" & answers == 1))/nrow(task_2 %>% filter(type == ""Adjective?"" & answers == 1))"
+"0",""

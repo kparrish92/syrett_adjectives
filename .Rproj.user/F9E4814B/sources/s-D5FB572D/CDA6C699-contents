@@ -1,0 +1,72 @@
+
+effect = "animate"
+
+data_grid_m = em_adj_df %>%
+  data_grid(animacy_condtion,frame_content_condition) %>%
+  add_fitted_draws(mod_b_2, dpar = TRUE, category = "answers",
+                   re_formula = NA) 
+
+ab = data_grid_m %>% 
+  filter(animacy_condtion == "animate" & frame_content_condition == "bleached") %>% 
+  rename("ab_est" = ".value")
+
+al = data_grid_m %>% 
+  filter(animacy_condtion == "animate" & frame_content_condition == "lexical") %>% 
+  rename("al_est" = ".value")
+
+ib = data_grid_m %>% 
+  filter(animacy_condtion == "inanimate" & frame_content_condition == "bleached")
+
+il = data_grid_m %>% 
+  filter(animacy_condtion == "inanimate" & frame_content_condition == "lexical")
+
+
+
+
+c = left_join(ab, al, by = c("animacy_condtion", ".draw")) %>% 
+  mutate(es_l_b = al_est - ab_est) %>% 
+  mutate(effect = "animate")
+
+pct_pos_df = c %>% 
+  mutate(is_positve = case_when(
+    es_l_b > 0 ~ 1,
+    es_l_b < 0 ~ 0
+  )) %>% 
+  group_by(effect) %>% 
+  summarise(qty_positive = sum(is_positve)/4000)
+
+es_l_b_hdi = data.frame(hdi_low = round(hdi(c$es_l_b)[,1], digits = 3),
+                        hdi_hi = round(hdi(c$es_l_b)[,2], digits = 3),
+                        es_l_b = round(mean(c$es_l_b), digits = 3)) %>% 
+  mutate(effect = "animacy")  %>% 
+  left_join(pct_pos_df, by = c("effect"))
+
+
+c %>% 
+  ggplot(aes(x = es_l_b, y = effect, fill = after_stat(x < 0))) + 
+  stat_halfeye() +
+  geom_text(data = mutate_if(es_l_b_hdi, is.numeric, round, 2),
+            aes(label = paste0(es_l_b, " [", `hdi_low`, " - ", `hdi_hi`, "]")), 
+            hjust = .5, vjust = 2, size = 2.5, family = "sans") +
+  geom_text(data = mutate_if(es_l_b_hdi, is.numeric, round, 2),
+            aes(label = paste0(qty_positive)), 
+            hjust = .5, vjust = -2.5, size = 2.5,
+            family = "sans") +
+  geom_vline(xintercept = 0, linetype = "dashed", 
+             alpha = .4) +
+  coord_cartesian(x = c(-1,1), clip = "off") +
+  theme_minimal() +
+  scale_fill_manual(values=cbPalette) + theme(legend.position = "none") +
+  theme(axis.line = element_line(colour = "black", 
+                                 size = .1, linetype = "solid")) +
+  xlab("Difference in Probability") + 
+  ylab("Effect") 
+#+  ggsave(here("figs", "eff_size.png"))
+
+
+
+
+
+
+
+

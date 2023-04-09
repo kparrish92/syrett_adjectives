@@ -1,0 +1,7 @@
+"0","read_csv(here(""docs"", ""tables"", ""study_2_model_ord.csv""), col_types = cols(.default = ""c"")) %>% "
+"0","  knitr::kable(format = ""pandoc"", align = c(""l"", ""r"", ""r"", ""r"", ""r"", ""r""), "
+"0","    caption = ""Summary of the posterior distribution modeling"
+"0","    the probability of a given confidence rating as a function of animacy and frame The table includes posterior medians, the 95% HDI, "
+"0","    the percentage of the HDI within the ROPE, and the maximum probability "
+"0","    of effect (MPE)."","
+"0","    label = ""study2-mod-ord"")"

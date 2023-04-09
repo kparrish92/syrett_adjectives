@@ -1,0 +1,33 @@
+---
+title: "Spring 2023 GPFFL Draft Cards"
+---
+
+## Overview
+
+Here's a little site I threw together to help with draft organization! Using the `.csv` file that Matty provided, I generated a draft card for every player. The draft card includes each player's skill level, height and shirt-size above the blue box. In the blue box, we can see their flag positions and previous sports experience.
+Each player's preferred pronouns are in the bottom right corner.
+I also organized the player cards into lists, and I can add more upon request.
+
+#### All
+
+[All Player cards](includes/all_pc.html)
+
+#### QBs
+
+[Primary QBs](includes/primary_qbs.html)
+
+[Secondary QBs](includes/secondary_qbs.html)
+
+#### By Skill level
+
+[Beginner Players](includes/beginner_players.html)
+
+[Intermediate Players](includes/intermediate_players.html)
+
+[Advanced Players](includes/advanced_players.html)
+
+#### By new and returning
+
+[New Players](includes/new_players.html)
+
+[Returning Players](includes/returning_players.html)

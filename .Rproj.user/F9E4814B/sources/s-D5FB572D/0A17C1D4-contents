@@ -1,0 +1,268 @@
+\chapter{The perception-production link in the intitial stage of L3 acquisition}
+
+```{r, include = FALSE}
+source(here::here("scripts", "both", "00_libs.R"))
+source(here::here("scripts", "both", "01_helpers.R"))
+source(here::here("scripts", "both", "03_load_data.R"))
+```
+
+# Introduction
+
+Historically, it has been debated whether L2 perceptual learning occurs prior to production.
+Previous theories of L2 acquisition of phonetics and phonology have debated the relationship between production and perception in new language learning. 
+Some theories, such as Motor Theory [@liberman1985motor] and Direct Realist Theory [@fowler1986event], predict that perception is a prerequisite for production
+The PAM and PAM-L2 are based [@bohn_nonnative_2007] on DRT and also thus suggests that the perception of sound contrasts predicts the acquisition of new-language sounds.
+In a new revision, The SLM-R [@wayland_revised_2021] now predicts that non-native sounds develop in tandem, rather than perception preceding production.
+
+The perception-production link can also inform L3 acquisition. 
+L3 models differ as to whether full language transfer or property-by-property influence occurs.
+If perception and production develop at different rates, as has been widely reported in the L2 literature, then counter-evidence would be provided for full transfer models. 
+On the other hand, property-by-property models would more readily explain a difference between perception and production.
+
+The present chapter analyzes the perception and production data from Chapters 3 and 4 in tandem with the primary goal of examining whether L1 and L2 influence occurs differently in perception and production. 
+While the primary goal of this analysis was to inform L3 models, these results also have implications for the perception-production link, and studies in L2 phonetic and phonology largely impact the interpretation of the results of the present study.
+
+## Earlier research in the perception-production link
+
+Early research in the perception-production link largely found that perception preceded production in development. 
+For example, @flege1993production found that proficient L1 Chinese - L2 English speakers perceived word final differences between /d/ and /t/ better than they were able to produce it.
+In a study examining the perception and production of the English /r/-/l/ contrast, @borden1983production found that perceptual training or higher performance on identification tasks predicted better production of the same contrasts in L1 Korean-L2 English speakers.
+Similar trends were reported in several additional studies, including more recent ones [@flege1997effects; @kissling2014predicts, *inter alia*].
+
+Other research, however, found that production precedes perception or that the two modalities are not related. 
+@goto1971auditory tested Japanese learners of English on their perception and production of English words containing /r/ and /l/ sounds, and found that even participants who achieved relatively high production accuracy still exhibited poor discrimination."
+Also examining /r/-/l/ in L1 Japanese-L2 English, @sheldon1982acquisition, reported similar results to Goto (1971), where the participants were more accurate in production than they were in perception.
+This trend has also been observed in additional language pairings.
+For example, L1 Dutch-L2 English speakers have been found to improve to a higher degree in the production of VOT than their perception [@flege1987production].
+Additionally, 
+@flege1997effects reported better production than perception of /æ/ by L1 German-L2 English speakers.
+
+Finally, it has also been found that the relationship between production and perception is segment-dependent or are autonomously represented altogether.
+For example, @hao2016imitation found that L1 Korean-L2 English speakers were better at perception than production for fricatives, but the opposite trend was observed in stops.
+On the other hand, @hattori2010examination concluded that production and perception are autonomously represented, based on the finding that L1 Japanese L2 English speakers' /r/-/l/ production and perception was weakly correlated across tasks.
+
+## Recent reserach in the perception-production link
+
+Given the history of contradictory results regarding whether the development of production is dependent upon production, more recent research has been conducted with one principle aim to identify rectify issues with previous research that may have contributed to the conflicting results.
+The trend in recent research seems to be that perception precedes production, although the conflicting results have remained.
+For example, in a study of L1 English speakers of L2 Japanese, @okuno2016perception studied whether perception training would lead to gains in production.
+For one training condition, the authors found that they also improved in production, and argued that this result supported the production-perception link. 
+@casillas2020phonetic also found that gains in perception preceded gains in production in VOT for L2 Spanish speakers over a 7 week domestic immersion program.
+Finally, @melnik2022relationship found that perception preceded production of the /y/-/u/ contrast in L1 English-L2 French speakers in both prelexical and lexical tasks. 
+
+Other studies have found an unclear relationship between perception and production.
+Another recent longitudinal study, @nagle2018examining also examined L2 Spanish stops production over 4 semesters of non-immersion Spanish courses.
+The results in this case were mixed showed a high degree of variability. 
+While some participants showed evidence of developing perception and production contemporaneous (in the same session), others showed evidence of time-lagged improvement, where improvement in production occurred only in the session after improved perception was occurred.
+Additionally, other participants showed evidence of an asymptotic relationship between perception in production, meaning that perception had to reach a high level of accuracy prior to production improving.
+@kim2022relationship analyzed the relationship between perception and production in L1 Korean-L2 English speakers across processing levels (lexical and prelexical) using a myriad of tasks.
+The authors concluded, based on the lack of a clear trend in the data, that perception and production are independent at both the lexical and prelexical level.
+
+## L3 reserach in the perception-production link
+
+Only one study examines the link in L3 [@wrembel2022relationship].
+The study examined the longitudinal acquisition of rhotic sounds by participants who speak English, German, Polish, with English being their L2, and German and Polish their L1 or L3. 
+The participants were tested a two testing times - 5 months of L3 learning and 10 month of L3 learning. 
+To measure perception, the authors used a forced-choice goodness task, in which participants heard a two versions of a target word within a frame and chose which was a better exemplar.
+Production was measured using a delayed repetition task, where target words were repeated after a 1000ms delay and prompt in all 3 languages. 
+The results revealed that, for many participants, L3 perception and production accuracy was low, and a clear link could not be established. 
+
+## The Present study 
+
+To summarize the literature to date on the perception-production link, there is a trend toward production preceding perception, but this relationship appears to also potentially vary by individual, segment and processing level.
+Additionally, there is very little research on the production-perception link in L3 learners.
+The present study compares the vowel production of initial exposure French and German from two prelexical tasks involving categorization in perception and pseudoword repetition in production, and provides a new language combination to the multilingual literature on the perception-production link.
+In particular, this work is guided by the following research question:
+
+RQ1: Do Spanish-English speakers show meaningful differences in perception in production at their initial exposure to a new language?
+
+In this case "meaningful differences" will be evaluated using the overlap of the posterior distribution and overall difference in probability between perception and production.
+
+This study has implications for the perception-production link, as well as L3 acquisition.
+If perception appears to develop prior to production, then it would stand as evidence that subsequent language development (after an L2) follows a similar pattern to the L2 development reported in many studies. 
+Of course, this would also stand in contrast to studies which found that production develops prior to or independently of perception.
+L3 models also benefit from these results, since some models predict that full language transfer occurs.
+Regardless of whether perception precedes production or vice-versa, this would not support full transfer models, such as the TPM or L2 Status Factor.
+
+## Participants 
+
+In total, `r nrow(did_both)` participants completed both the perception and production experiments (English L1 n = `r nrow(did_both %>% filter(L1 == "English"))`;
+Spanish L1 n = `r nrow(did_both %>% filter(L1 == "Spanish"))`).
+The participants were late bilinguals who completed both the perception and production experiments of the present dissertation.
+
+# Analysis 
+
+Since the perception data was categorical forced-choice categorization data and the production data was continuous, the production data was converted from continuous to categorical for the purpose of the present analysis using an R script.
+Specifically, the production data of vowels was transformed such that it matched the perception data and was binary (whether a given French or German token was more like English or Spanish).
+The data from the perception portion of the present chapter was reported in the vowel categorization task described in section 3.2.
+In this task, French and German vowel sounds were categorized given the choice of seven total carrier words, of which 4 English and 3 Spanish words were included.
+Thus, for each vowel token, either a Spanish or English category was chosen.
+The production data was taken from the vowel production in Chapter 4.2.5 of these is continuous in two dimensions (F1 and F2).
+A pipeline was devised to convert the continuous production data into binary data, essentially simulated a Native speaker forced-choice judgment of English-like or Spanish like on all French and German data points.
+For each data point, the Euclidian distance was measured to both the spectral centroid of corresponding Spanish phoneme and English phoneme. 
+These distances were used to calculate relative distance in the two dimensional space from a given data point to both centroids using the following equation.
+
+\begin{equation}
+  probability_s = distance_e/(distance_e + distance_s)
+\end{equation}
+
+"Distance_e" refers to the Euclidian distance from a point to the English spectral centroid, and "distance_s" is the distance from that same point to the Spanish centroid.
+The equation produces "probability_s", which in this case is the probability of that token being categorized as Spanish-like.
+For example, if the Euclidian distance from a data point to the English centroid was 2, and the distance from the Spanish centroid was 1, then the probability of choosing a Spanish category 2/2+1 = .66.
+To find the probability of an English category, one can subtract (1 - probability_s).
+From here, using the probability derived from the Euclidian distance of each data point, the `rbinom` generated either a 1 (Spanish selection) or a 0 (English selection).
+The data sets from the vowel categorization and pseudoword repetition task were then combined. 
+
+Figure \@ref(fig:centroid-ex) shows an example for a single data point for how Euclidian distance was converted to probability. 
+The logic to this formula is that the closest corresponding centroid to a given data point should be proportionally more likely to be chosen than one that is further away.
+The corresponding centroids were /i/ in all languages, /y/ and /u/ in French and German and Spanish and English, /o/ in French, German and Spanish to English /\textscripta/,  and the wedge in French German and English to Spanish /a/. 
+Table \@ref(tab:labels_table) shows each corresponding phoneme and its label in the data.
+Figure \@ref(fig:centroid-ex) shows a hypothetical example of how a given vowel production was probabilistically converted to either a Spanish or English production. 
+In the example, the Spanish centroid is closer (distance of 1) than the English centroid (distance of 2) to the data point.
+The use of this formula provides an probabilistic alternative to simply choosing the closer centroid as an all-or-nothing choice. 
+Figure \@ref(fig:centroid-ex) shows all raw French and German data points relative to their respective centroids.
+
+```{r, 'centroid-ex', echo=FALSE, fig.cap="A hypothetical example of the coverstion from Euclidian Distance to Probability for a single data point"}
+knitr::include_graphics(here("sections", "figs", "distance_formula.png"))
+```
+
+```{r, 'centroid', echo=FALSE, fig.cap="Raw French and German data points relative to each Spanish and English centroid"}
+knitr::include_graphics(here("sections", "figs", "centroid.png"))
+```
+
+To analyze the newly formed data set, a Bayesian logistic regression models were run for each the Spanish L1 and English L1 group.
+In each case, the outcome variable was the log-odds of choosing a Spanish category.
+The fixed effect predictors were mode (perception or production) and phoneme (4 levels: "i", "u", "a" or "o".)
+The phoneme in this case was labeled in the data by their corresponding grapheme so that the model could compare the intended corresponding phonemes across languages.
+The models both included the default brms priors: Student’s T distribution with 3 degrees of freedom. The model was run using with 4000 iterations of Hamiltonian Monte-Carlo sampling (1000 warm up), across 4 chains and 8 processing cores.
+
+\begin{table}[h]
+  \begin{center}
+  \caption{Corresponding Phonemes across languages and their label in the data.\label{labels_table}}
+  \vspace{0.3in}
+    \begin{tabular}{ccccc}
+      \hline 
+      \hline
+English & Spanish & French & German & data label \\
+  \hline
+/i/ & /i/ & /i/ & /i/ & "i" \\
+/u/ & /u/ & /y/ & /y/ & "u" \\
+/\textscripta/ & /o/ & /o/ & /o/ & "o" \\
+/\textturnv/ & /a/ & /\textturnv/ & /\textturnv/ & "a" \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+# Results
+
+Figure \@ref(fig:span-desc-both) shows the total count of choices for Spanish and English categories per phoneme and language (French or German) by Spanish L1 group.
+Figure \@ref(fig:eng-desc-both) shows the same information by the English L1 group.
+In both figures, the red bar represents the total quantity of German and French tokens categorized using an English or Spanish category. 
+For the L1 Spanish  group,  across all 4 phonemes, the quantity of English categorizations was much higher than Spanish categorizations in perception. 
+In production, there was not a clear preference for English or Spanish in any phoneme.
+For the L1 English group, the trends were similar.
+An overall bias for English was evident for /i/, /o/ and the wedge, but the production of /y/ was assimilated to /u/ in both languages similarly. 
+Similarly to the Spanish L1 group, there was not a clear trend in terms of language preference in production in the English L1 group.
+
+```{r, 'span-desc-both', echo=FALSE, fig.cap="The quantity English and Spanish categories by the L1 Spanish group as a function of mode and segment"}
+knitr::include_graphics(here("sections", "figs", "both_span_desc.png"))
+```
+
+```{r, 'eng-desc-both', echo=FALSE, fig.cap="The quantity English and Spanish categories by the L1 English group as a function of mode and segment"}
+knitr::include_graphics(here("sections", "figs", "both_eng_desc.png"))
+```
+
+Figure \@ref(fig:span-mod-both) shows the posterior distribution of the logistic model converted to probability (for the log-odds output see Table \@ref(tab:span-mod-log).
+The model corroborates the trends observed in the descriptive data, since it shows that the probability of a Spanish segment is around .5 for all segments in production, but much lower in perception overall. 
+Figure \@ref(fig:eng-mod-both) (and table \@ref(tab:eng-mod-log) shows the same information for the L1 English group.
+This model again mirrors the descriptive data, where there was generally around a .5 probability of a choice of English or Spanish in production, but a preference for an English category in perception.
+
+
+```{r, 'span-mod-both', echo=FALSE, fig.cap="The probability of choosing a Spanish category by the L1 Spanish group as a function of mode and segment"}
+knitr::include_graphics(here("sections", "figs", "both_span_mod.png"))
+```
+
+```{r, 'eng-mod-both', echo=FALSE, fig.cap="The probability of choosing a Spanish category by the L1 English group as a function of mode and segment"}
+knitr::include_graphics(here("sections", "figs", "both_eng_mod.png"))
+```
+
+
+```{r, 'eng-mod-log'}
+read_csv(here("data", "both", "tables", "eng_model_table.csv"), col_types = cols(.default = "c")) %>% 
+  knitr::kable(format = "pandoc", align = c("l", "r", "r", "r", "r", "r"), 
+    caption = "Summary of the English L1 group posterior distribution modeling 
+    language choice as a phoneme and mode. The table includes posterior medians, the 95% HDI, 
+    the percentage of the HDI within the ROPE, and the maximum probability 
+    of effect (MPE).",
+    label = "eng-mod-log")
+```
+
+```{r, 'span-mod-log'}
+read_csv(here("data", "both", "tables", "span_model_table.csv"), col_types = cols(.default = "c")) %>% 
+  knitr::kable(format = "pandoc", align = c("l", "r", "r", "r", "r", "r"), 
+    caption = "Summary of the Spanish L1 group posterior distribution modeling 
+    language choice as a phoneme and mode. The table includes posterior medians, the 95% HDI, 
+    the percentage of the HDI within the ROPE, and the maximum probability 
+    of effect (MPE).",
+    label = "span-mod-log")
+```
+
+Overall, these results point to a difference in perception and production.
+In particular, there is evidence that, regardless of order of acquisition, there was a preference for English categories in perception in most cases, although this varied by segment.
+For instance, /i/, which is present in all languages was closer to a 50-50 split than other segments.
+The phoneme /y/ in French and German was also categorized as closer to evenly given Spanish and English /u/, with slight biases to either English or Spanish in perception. 
+This differed from production, where both groups showed a nearly equal probability of an English or Spanish category, suggesting that no clear trends towards English or Spanish emerge in production.
+
+# Discussion 
+
+## Implications for L3 models 
+
+Full transfer L3 models, in their current form, cannot account for different rates of development in L3 perception and production.
+These models, including the Typological Primacy Model [@rothman_l3_2011] and the L2 Status factor [@bardel_role_2007], predict that full language transfer occurs during L3 development or either the more typologically similar language to the L3 or the most recent late learned language.
+This transfer is predicted to occur all at once, rather than incrementally. 
+The present chapter provides counter-evidence for this claim, since the influence of English on the L3 was heavier in perception than in production. 
+
+Other L3 models, which predict both the L1 and L2 can influence the L3, such as the Linguistic Proximity Model [LPM; @westergaard_crosslinguistic_2017] and the Scalpel Model [@slabakova_scalpel_2017], can more readily explain the results obtained in the present chapter.
+Although these models do not explicitly predict a difference in language influence between perception and production, they suggest that there is Full Transfer Potential (FTP) from a given language representation. 
+A post-hoc explanation from the LPM might be that modality (perception versus production) has an impact on this full transfer potential, where access to a phonetic category in perception in initially easier than in production.
+
+## Implications for the perception-production link
+
+The present study also provides another instance of perceptual development preceding production, in this case at the prelexical level.
+Importantly, these results should not be taken as evidence that all of perception precedes all of production.
+This distinction is important given that previous research has found that successful perception and production at the prelexical level does not necessarily transfer to the lexical level [@llompart2019imitation].
+That is, since these tasks did not involve lexical items or processing, the present data cannot provide evidence that (L3) lexical perception precedes its production.
+
+It is important to note, also, that the idea that perception precedes production is an interpretation by the present author of the differences obtained in the data.
+In previous research of the production-perception link, the prelexical tasks in perception are typically AX discrimination tasks based on accuracy of the discrimination of a contrast.
+That accuracy is then compared to the production of that contrast in a pseudoword or real word (although this is a case where prelexical and lexical tasks are compared).
+In the present case, differences in perception and production, rather than differences in accuracy, were of import, since the primary goal of this chapter was to examine previous language influence on perception relative to production rather than whether one of the two develops first. 
+In other words, the nature of the tasks involved did not allow for accuracy to be measured, since it provided imperfect matches between the stimuli and answer choices.
+Nevertheless, production was quite close to chance, while perception largely showed English bias.
+This result is taken as evidence that previous languages have more of a controlling influence over perception initially.
+Whether this influence eventually impact production is a question for future research, and would further inform the production- perception link in a multilingual context. 
+
+## Limitations and future directions
+
+The present study was not without limitations.
+Firstly, it is important to point out that the use of imitation in general in not agreed to be a measure of pure production.
+For instance, @hao2016imitation argue that an imitation task can be viewed either as a production task given an auditory prompt, or, oppositely, as a perception task with an oral response.
+They gathered evidence for this view using L1 English--L2 Mandarin and L1 Korean-L2 English speakers whose accuracy in L2 imitation was not associated with their accuracy in identification tasks.
+
+Additional limitations include the low sample in the English speaking production task. 
+One issue with a smaller sample size is the increased probability of a false negative finding. 
+While this may be these case here, it is argued that the trend observed in the L1 Spanish group and in the English speakers' perception follow similar trend and have greater statistical power.
+That is, while one still cannot be certain that small differences do not exist between groups, it would not be predicted in a future, higher sample study, given the trends observed in the similar groups.
+
+Finally, the use of the pipeline to convert the continuous vowel production data to a binary choice was devised relative to this particular experiment, and could likely be improved with time. 
+For instance, the same logic of taking a given point and deriving a probability based on its proximity to centroids could be expanded beyond the corresponding phonemes to include all centroids.
+Such an approach might reveal more nuance in future experiments. 
+
+# Conclusion
+
+The present chapter examined the the link between perception and production of new language sounds by Spanish-English bilinguals.
+French and German vowel sounds were categorized and repeated by L1 English - L2 Spanish and L1 Spanish L2 English speakers and were categorized in both modalities as either English-like or Spanish-like.
+The results revealed a difference in perception and production. 
+In particular, it was found that an overall English bias was present in perception, while no clear bias for English or Spanish was found in production.
+This result is interpreted as evidence that L3 perception is influenced by source languages to a higher degree than production, and may develop sooner as a result.

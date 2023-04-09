@@ -1,0 +1,52 @@
+{
+    "sources": [
+        {
+            "author": [
+                {
+                    "family": "Bürkner",
+                    "given": "Paul-Christian"
+                }
+            ],
+            "container-title": "Journal of statistical software",
+            "id": "burkner2017brms",
+            "issued": {
+                "date-parts": [
+                    [
+                        2017
+                    ]
+                ]
+            },
+            "page": "1-28",
+            "title": "Brms: An r package for bayesian multilevel models using stan",
+            "title-short": "Brms",
+            "type": "article-journal",
+            "volume": "80"
+        },
+        {
+            "author": [
+                {
+                    "family": "Lüdecke",
+                    "given": "Daniel"
+                },
+                {
+                    "family": "Lüdecke",
+                    "given": "Maintainer Daniel"
+                }
+            ],
+            "container-title": "R package version",
+            "id": "ludecke2015package",
+            "issue": "9",
+            "issued": {
+                "date-parts": [
+                    [
+                        2015
+                    ]
+                ]
+            },
+            "title": "Package “sjPlot”",
+            "type": "article-journal",
+            "volume": "1"
+        }
+    ],
+    "project_biblios": []
+}
