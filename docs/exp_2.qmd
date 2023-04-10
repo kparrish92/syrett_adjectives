@@ -16,73 +16,22 @@ library(brms)
 
 knitr::opts_chunk$set(echo = FALSE)
 
-
-target_words = c("DAXY", "WILPY", "SPOOVY", "TROBY", "BRIPSY", "LARPY")
-
-task_2 = read.csv(here("data", "tidy", "task_2_tidy.csv")) %>% 
-  filter(word_col %in% target_words)
-
-em_adj_df = read.csv(here("data", "tidy", "em_adj_df.csv"))
-  
-mod_b_2 = read_rds(here("data", "models", "study_2_b.RDS"))
-
-total_adjective_guesses = nrow(task_2 %>% filter(type == "Adjective?" & answers == 1))/nrow(task_2 %>% filter(type == "Adjective?"))
-
-prop_emotional = nrow(task_2 %>% filter(type == "Emotion Adj?-Conserv" & answers == 1))/nrow(task_2 %>% filter(type == "Adjective?" & answers == 1))
-
-rep_df = em_adj_df %>%
-  data_grid(animacy_condtion,frame_content_condition) %>%
-  add_fitted_draws(mod_b_2, dpar = TRUE, category = "answers",
-                   re_formula = NA) 
-
-# animacy 
-a_df = rep_df %>% filter(animacy_condtion == "animate") 
-ia_df = rep_df %>% filter(animacy_condtion == "inanimate") 
-
-# frame
-
-b_df = rep_df %>% filter(frame_content_condition == "bleached") 
-l_df = rep_df %>% filter(frame_content_condition == "lexical") 
-
-# animacy-frame interaction
-
-## animate bleached 
-ab_df = rep_df %>% filter(animacy_condtion == "animate" & frame_content_condition == "bleached")
-## animate lexical
-al_df = rep_df %>% filter(animacy_condtion == "animate" & frame_content_condition == "lexical")
-
-## inanimate bleached 
-ib_df = rep_df %>% filter(animacy_condtion == "inanimate" & frame_content_condition == "bleached")
-## inanimate lexical
-il_df = rep_df %>% filter(animacy_condtion == "inanimate" & frame_content_condition == "lexical")
-
+source(here::here("scripts", "task_2", "03_load_data.R"))
 ```
 
-## Overview 
+## Overview
 
-Word Learning - Single target frame in a trial 
- [task preview](https://idps.rutgers.edu/idp/profile/SAML2/Redirect/SSO?execution=e2s1)
+Word Learning - Single target frame in a trial [task preview](https://idps.rutgers.edu/idp/profile/SAML2/Redirect/SSO?execution=e2s1)
 
-Task: 
-Participants were presented with a set of videos with a dialogue between two speakers featuring a novel word. At the end of each trial, they were asked to provide their guess about the novel word's meaning, and indicate their confidence level (scale: 1-4). The difference between this experiment and (1) is that in each target adjective trial, participants heard the adjective in predicative version and then only in ONE single other frame. 
- 
+Task: Participants were presented with a set of videos with a dialogue between two speakers featuring a novel word. At the end of each trial, they were asked to provide their guess about the novel word's meaning, and indicate their confidence level (scale: 1-4). The difference between this experiment and (1) is that in each target adjective trial, participants heard the adjective in predicative version and then only in ONE single other frame.
+
 ## Statistical Analysis
 
-First, in order to determine the **probability of guessing an emotion adjective**, a Bayesian logistic regression was run. 
-In the model, the fixed effect predictors were animacy condition (2 levels: animate, inanimate) and frame condition (2 levels: bleached, lexical) and their interaction.
-Second, in order to analyze **confidence ratings**, an Bayesian ordinal regression was run.
-The outcome of this model was the probability of a confidence rating as a function of the same fixed effect predictors from the logistic model: animacy condition (2 levels: animate, inanimate) and frame condition (2 levels: bleached, lexical) and their interaction.
-All model priors were the default in `brms`, a student's T distribution with 3 degree of freedom. 
-All models were fit with 4000 iterations (1000 warm-up). 
-Hamiltonian Monte-Carlo sampling was carried out with 6 chains distributed between 6 processing cores.
+First, in order to determine the **probability of guessing an emotion adjective**, a Bayesian logistic regression was run. In the model, the fixed effect predictors were animacy condition (2 levels: animate, inanimate), frame condition (2 levels: bleached, lexical), and frame type (6 levels: "at DP because S", "about DP", "to VP", "that S", "about gerund", "of DP because S") and all interactions. Second, in order to analyze **confidence ratings**, an Bayesian ordinal regression was run. The outcome of this model was the probability of a confidence rating as a function of the same fixed effect predictors from the logistic model: animacy condition (2 levels: animate, inanimate) and frame condition (2 levels: bleached, lexical) and their interaction. All model priors were the default in `brms`, a student's T distribution with 3 degree of freedom. All models were fit with 4000 iterations (1000 warm-up). Hamiltonian Monte-Carlo sampling was carried out with 6 chains distributed between 6 processing cores.
 
-## Results 
+## Results
 
-Overall, the majority of guesses were classified as adjectives (`r round(total_adjective_guesses, digits = 2)*100`%).
-Of those, `r round(prop_emotional, digits = 2)*100`% were coded as emotion adjectives.
-The logistic model is summarized in @tbl-log-model (this can be included in the body of a paper or the appendix).
-The specific interpretation of the model output is discussed in the subsequent sections in more detail.
-I opted for short prose instead of style, for the sake of both clarity and brevity. 
+Overall, the majority of guesses were classified as adjectives (`r round(total_adjective_guesses, digits = 2)*100`%). Of those, `r round(prop_emotional, digits = 2)*100`% were coded as emotion adjectives. The logistic model is summarized in @tbl-log-model (this can be included in the body of a paper or the appendix). The specific interpretation of the model output is discussed in the subsequent sections in more detail. I opted for short prose instead of style, for the sake of both clarity and brevity.
 
 ```{r}
 #| label: tbl-log-model
@@ -95,32 +44,17 @@ read_csv(here("docs", "tables", "study_2_model.csv"), col_types = cols(.default 
 
 ### Did animacy matter?
 
-Yes: emotion adjective guesses were highly probable in the animate (condition `r round(mean(a_df$.value), digits = 2)` HDI [`r round(hdi(a_df$.value), digits = 2)[1]` -`r round(hdi(a_df$.value), digits = 2)[2]`]).
-Guesses for inanimate adjectives were less likely to be emotion adjectives `r round(mean(ia_df$.value), digits = 2)`
-HDI [`r round(hdi(ia_df$.value), digits = 2)[1]` -`r round(hdi(ia_df$.value), digits = 2)[2]`].
+Yes: emotion adjective guesses were highly probable in the animate (condition `r round(mean(a_df$.value), digits = 2)` HDI \[`r round(hdi(a_df$.value), digits = 2)[1]` -`r round(hdi(a_df$.value), digits = 2)[2]`\]). Guesses for inanimate adjectives were less likely to be emotion adjectives `r round(mean(ia_df$.value), digits = 2)` HDI \[`r round(hdi(ia_df$.value), digits = 2)[1]` -`r round(hdi(ia_df$.value), digits = 2)[2]`\].
 
 ### Did frame matter?
 
-Not as much. Overall, the was less of a difference in frame (before we consider the interaction).
-That is, "overall" refers to the pooled estimates of a given frame of both animate and inanimate subjects.
-The probability of an emotion adjective in the lexical frame was `r round(mean(l_df$.value), digits = 2)`
-HDI [`r round(hdi(l_df$.value), digits = 2)[1]` -`r round(hdi(l_df$.value), digits = 2)[2]`].
-The probability of an emotion adjective in the bleached frame was `r round(mean(b_df$.value), digits = 2)`
-HDI [`r round(hdi(b_df$.value), digits = 2)[1]` -`r round(hdi(b_df$.value), digits = 2)[2]`].
+Not as much. Overall, the was less of a difference in frame (before we consider the interaction). That is, "overall" refers to the pooled estimates of a given frame of both animate and inanimate subjects. The probability of an emotion adjective in the lexical frame was `r round(mean(l_df$.value), digits = 2)` HDI \[`r round(hdi(l_df$.value), digits = 2)[1]` -`r round(hdi(l_df$.value), digits = 2)[2]`\]. The probability of an emotion adjective in the bleached frame was `r round(mean(b_df$.value), digits = 2)` HDI \[`r round(hdi(b_df$.value), digits = 2)[1]` -`r round(hdi(b_df$.value), digits = 2)[2]`\].
 
-### What did the interaction of animacy and frame look like? 
+### What did the interaction of animacy and frame look like?
 
-We do see clear differences in the interaction of animacy and frame.
-Specifically: The probability of an emotion adjective in the lexical frame with an inanimate subject was `r round(mean(il_df$.value), digits = 2)`
-HDI [`r round(hdi(il_df$.value), digits = 2)[1]` -`r round(hdi(il_df$.value), digits = 2)[2]`]. The probability of an emotion adjective in the bleached frame with an inanimate subject was `r round(mean(ib_df$.value), digits = 2)`
-HDI [`r round(hdi(ib_df$.value), digits = 2)[1]` -`r round(hdi(ib_df$.value), digits = 2)[2]`]. The probability of an emotion adjective in the lexical frame with an animate subject was `r round(mean(al_df$.value), digits = 2)`
-HDI [`r round(hdi(al_df$.value), digits = 2)[1]` -`r round(hdi(al_df$.value), digits = 2)[2]`]. Finally, the probability of an emotion adjective in the bleached frame with an animate subject was `r round(mean(ab_df$.value), digits = 2)`
-HDI [`r round(hdi(ab_df$.value), digits = 2)[1]` -`r round(hdi(ab_df$.value), digits = 2)[2]`].
+We do see clear differences in the interaction of animacy and frame. Specifically: The probability of an emotion adjective in the lexical frame with an inanimate subject was `r round(mean(il_df$.value), digits = 2)` HDI \[`r round(hdi(il_df$.value), digits = 2)[1]` -`r round(hdi(il_df$.value), digits = 2)[2]`\]. The probability of an emotion adjective in the bleached frame with an inanimate subject was `r round(mean(ib_df$.value), digits = 2)` HDI \[`r round(hdi(ib_df$.value), digits = 2)[1]` -`r round(hdi(ib_df$.value), digits = 2)[2]`\]. The probability of an emotion adjective in the lexical frame with an animate subject was `r round(mean(al_df$.value), digits = 2)` HDI \[`r round(hdi(al_df$.value), digits = 2)[1]` -`r round(hdi(al_df$.value), digits = 2)[2]`\]. Finally, the probability of an emotion adjective in the bleached frame with an animate subject was `r round(mean(ab_df$.value), digits = 2)` HDI \[`r round(hdi(ab_df$.value), digits = 2)[1]` -`r round(hdi(ab_df$.value), digits = 2)[2]`\].
 
-We have a few options for plots here. Both plots below show the same information (the posterior distribution of the probability of guessing an emotion adjective), but present with a different fixed effect on the y-axis. 
-In @fig-ani, animacy is on the y-axis. 
-In this plot we can see that the probability of guessing an emotion adjective is very similar in the bleached and lexical frames when the subject is animate.
-On the other hand, lexical frame does make a difference when the subject is inanimate.
+We have a few options for plots here. Both plots below show the same information (the posterior distribution of the probability of guessing an emotion adjective), but present with a different fixed effect on the y-axis. In @fig-ani, animacy is on the y-axis. In this plot we can see that the probability of guessing an emotion adjective is very similar in the bleached and lexical frames when the subject is animate. On the other hand, lexical frame does make a difference when the subject is inanimate.
 
 ```{r}
 #| label: fig-ani
@@ -128,10 +62,7 @@ On the other hand, lexical frame does make a difference when the subject is inan
 knitr::include_graphics(here("docs", "plots", "task_2_bayesian.png"))
 ```
 
-@fig-frame has the frame condition on the y-axis. 
-This shows us that words with animate subjects are more likely to be guessed as emotion adjectives than ones with animate subjects in both lexical and bleached frames.
-These two plots are derived from the same model, but provide different insights.
-Depending on which one answers the research question better, we can include it.
+@fig-frame has the frame condition on the y-axis. This shows us that words with animate subjects are more likely to be guessed as emotion adjectives than ones with animate subjects in both lexical and bleached frames. These two plots are derived from the same model, but provide different insights. Depending on which one answers the research question better, we can include it.
 
 ```{r}
 #| label: fig-frame
@@ -139,16 +70,9 @@ Depending on which one answers the research question better, we can include it.
 knitr::include_graphics(here("docs", "plots", "task_2_bayesian_frame.png"))
 ```
 
-### Effect Sizes 
+### Effect Sizes
 
-Just as for some previous work, I included an two example effect size plots that plot the difference between the posterior distributions in @fig-ani.
-@fig-ani-es-1 shows all plausible differences in the effect of frame (going from bleached to lexical) in the inanimate condition.
-The number inside to distribution is the probability of the effect being positive (a 1 indicates that we are 100% sure the effect is positive based on our data).
-The numbers below the data points are the mean of the the distribution (or the most probable effect size), and the upper and lower bounds of the 95% Highest Density interval (HDI).
-@fig-ani-es-2 shows the same information in the animate condition. 
-In this case, we see that the probability of positive effect is .39, suggesting that we are unsure of the direction of the effect.
-In other words, we can't conclude that frame made a difference when the subject was animate.
-On the other hand, we do see compelling evidence that frame is important when the subject is inanimate.
+Just as for some previous work, I included an two example effect size plots that plot the difference between the posterior distributions in @fig-ani. @fig-ani-es-1 shows all plausible differences in the effect of frame (going from bleached to lexical) in the inanimate condition. The number inside to distribution is the probability of the effect being positive (a 1 indicates that we are 100% sure the effect is positive based on our data). The numbers below the data points are the mean of the the distribution (or the most probable effect size), and the upper and lower bounds of the 95% Highest Density interval (HDI). @fig-ani-es-2 shows the same information in the animate condition. In this case, we see that the probability of positive effect is .39, suggesting that we are unsure of the direction of the effect. In other words, we can't conclude that frame made a difference when the subject was animate. On the other hand, we do see compelling evidence that frame is important when the subject is inanimate.
 
 ```{r}
 #| label: fig-ani-es-1
@@ -162,11 +86,9 @@ knitr::include_graphics(here("docs", "plots", "inanimate_es.png"))
 knitr::include_graphics(here("docs", "plots", "animate_es.png"))
 ```
 
-### Ratings 
+### Ratings
 
-Overall, subjects were not highly confident in their guesses.
-@fig-hist shows that 2 was chosen most often overall, where 4 was scarcely chosen at all. 
-The ordinal model is summarized in @tbl-rating-mod, and the converted to probability and visualized in @fig-rat-mod
+Overall, subjects were not highly confident in their guesses. @fig-hist shows that 2 was chosen most often overall, where 4 was scarcely chosen at all. The ordinal model is summarized in @tbl-rating-mod, and the converted to probability and visualized in @fig-rat-mod
 
 ```{r}
 #| label: fig-hist
@@ -174,11 +96,7 @@ The ordinal model is summarized in @tbl-rating-mod, and the converted to probabi
 knitr::include_graphics(here("docs", "plots", "ratings_desc.png"))
 ```
 
-The ratings data show us that in three of the four possible cases, 2 was the most probable confidence rating. 
-In the inanimate-bleached condition, 1 was the most probable confidence rating. 
-Additionally, 4 was the least probable rating in all 4 conditions. 
-However, in the animate-lexical condition, 3 was the second most probable rating, unlike the other three conditions, where 3 was the second-least probable rating. 
-As a result, it is plausible that the participants were **most confident in their ratings in the animate-lexical condition.**
+The ratings data show us that in three of the four possible cases, 2 was the most probable confidence rating. In the inanimate-bleached condition, 1 was the most probable confidence rating. Additionally, 4 was the least probable rating in all 4 conditions. However, in the animate-lexical condition, 3 was the second most probable rating, unlike the other three conditions, where 3 was the second-least probable rating. As a result, it is plausible that the participants were **most confident in their ratings in the animate-lexical condition.**
 
 ```{r}
 #| label: tbl-rating-mod
@@ -195,5 +113,16 @@ read_csv(here("docs", "tables", "study_2_model_ord.csv"), col_types = cols(.defa
 knitr::include_graphics(here("docs", "plots", "ratings_mod.png"))
 ```
 
+### Within subjects Frame-type
 
- 
+@fig-ws-plot-mod shows the probability of guessing an emotion adjective in each of the 4 conditons for a 6 frame types.
+The shades of blue are animate conditions, while the red shades are inanimate conditions. 
+Overall, animate conditions had a higher probability of being guessed as an emotion adjective than inanimate conditions.  
+Additionally, in five out of seven cases, animate subjects in the lexical frame produced the highest probability of guessing an emotion adjective.
+In the remaining two ("to VP" and "about DP"), the animate-bleached condition was the condition in which an emotion adjective guess was the highest. 
+
+```{r}
+#| label: fig-ws-plot-mod
+#| fig-cap: "The probability of frame-type for each conditon"
+knitr::include_graphics(here("docs", "plots", "ws_plot.png"))
+```

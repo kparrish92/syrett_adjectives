@@ -1,8 +1,43 @@
 "0","library(here)"
 "0","library(tidyverse)"
-"0","task_2 = read.csv(here(""data"", ""tidy"", ""task_2_tidy.csv""))"
+"0","library(janitor)"
+"2","
+Attaching package: ‘janitor’
+
+"
+"2","The following object is masked from ‘package:insight’:
+
+    clean_names
+
+"
+"2","The following objects are masked from ‘package:stats’:
+
+    chisq.test, fisher.test
+
+"
+"0","library(bayestestR)"
+"0","library(bayesplot)"
+"2","This is bayesplot version 1.8.1
+"
+"2","- Online documentation and vignettes at mc-stan.org/bayesplot
+"
+"2","- bayesplot theme set to bayesplot::theme_default()
+"
+"2","   * Does _not_ affect other ggplot2 plots
+"
+"2","   * See ?bayesplot_theme_set for details on theme setting
+"
+"0","library(tidybayes)"
+"0","library(modelr)"
+"0","library(brms)"
 "0",""
-"0","total_adjective_guesses = nrow(task_2 %>% filter(type == ""Adjective?"" & answers == 1))/nrow(task_2 %>% filter(type == ""Adjective?""))"
+"0","knitr::opts_chunk$set(echo = FALSE)"
 "0",""
-"0","prop_emotional = nrow(task_2 %>% filter(type == ""Emotion Adj?-Conserv"" & answers == 1))/nrow(task_2 %>% filter(type == ""Adjective?"" & answers == 1))"
-"0",""
+"0","source(here::here(""scripts"", ""task_2"", ""03_load_data.R""))"
+"2","Warning in file(file, ""rt"") :"
+"2","
+ "
+"2"," cannot open file '/Users/kyleparrish/Documents/GitHub/syrett_adjectives/data/tidy/em_adj_df_ratings.csv': No such file or directory
+"
+"2","Error in file(file, ""rt"") : cannot open the connection
+"
