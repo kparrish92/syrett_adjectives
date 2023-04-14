@@ -19,25 +19,19 @@ knitr::opts_chunk$set(echo = FALSE)
 #source(here::here("scripts", "task_2", "03_load_data.R"))
 ```
 
-## Overview 
+## Overview
 
-(3) Forced Choice Referent Selection
-You can preview the current version of the task here, if you're interested. (We'll be running two follow-up versions, manipulating the lexical prompt before the test phase.)
+(3) Forced Choice Referent Selection You can preview the current version of the task here, if you're interested. (We'll be running two follow-up versions, manipulating the lexical prompt before the test phase.)
 
-Task: 
-Participants were presented with a brief video featuring a target novel word, then asked to use this information to make a selection between two referents at test. Only 1 condition run (so far).
+Task: Participants were presented with a brief video featuring a target novel word, then asked to use this information to make a selection between two referents at test. Only 1 condition run (so far).
 
 ## Statistical Analysis
 
-In order to find the probability of choosing an animate referent, a binomial logistic regression was run.
-The fixed effect predictor was condition (8 levels: 
-blickets (count N), daxy-about DP, wilpy-of…because,  spoovy-that, troby-about gerund, brispy-at…because,  larpy-to VP, roaking (transitive).
-All model priors were the default in `brms`, a student's T distribution with 3 degree of freedom. All models were fit with 4000 iterations (1000 warm-up). Hamiltonian Monte-Carlo sampling was carried out with 6 chains distributed between 6 processing cores
+In order to find the probability of choosing an animate referent, a binomial logistic regression was run. The fixed effect predictor was condition (8 levels: blickets (count N), daxy-about DP, wilpy-of...because, spoovy-that, troby-about gerund, brispy-at...because, larpy-to VP, roaking (transitive). All model priors were the default in `brms`, a student's T distribution with 3 degree of freedom. All models were fit with 4000 iterations (1000 warm-up). Hamiltonian Monte-Carlo sampling was carried out with 6 chains distributed between 6 processing cores
 
 **-compare each target adjective trial to chance level (chance=.5, likeliness to guess emot. adj)**
 
-@fig-ind shows the probability of choosing an animate referent in each condition.
-Almost every condition is reliably choosing the animate referent above chance.
+@fig-ind shows the probability of choosing an animate referent in each condition. Almost every condition is reliably choosing the animate referent above chance.
 
 ```{r}
 #| label: fig-ind
@@ -48,8 +42,7 @@ knitr::include_graphics(here("docs", "plots", "ind_prob.png"))
 
 **-compare target trials in aggregate to chance level (chance=.5, likeliness to guess emot. adj)**
 
-@fig-agg shows the aggregate of these individual estimates. 
-Overall, the probability of choosing the animate referent was .78 [95% HDI .72-.84].
+@fig-agg shows the aggregate of these individual estimates. Overall, the probability of choosing the animate referent was .78 \[95% HDI .72-.84\].
 
 ```{r}
 #| label: fig-agg
@@ -62,7 +55,14 @@ knitr::include_graphics(here("docs", "plots", "aggregate_prob.png"))
 
 I am unsure about this - How is it different from 1?
 
+**Model table**
 
+```{r}
+#| label: tbl-rating-mod
+#| tbl-cap: Summary of the posterior distribution modeling the probability of a given confidence rating as a function of animacy and frame The table includes posterior medians, the 95% HDI, the percentage of the HDI within the ROPE, and the maximum probabilityof effect (MPE)."
 
-
-
+read_csv(here("docs", "tables", "log_pct.csv"), col_types = cols(.default = "c")) %>% 
+  select(-X1) %>% 
+  knitr::kable(format = "pandoc", align = c("l", "r", "r", "r", "r", "r"), 
+    label = "study3")
+```

@@ -61,6 +61,11 @@ rep_df = fct %>%
 
 conditional_effects(mod_b_fct)
 
+describe_posterior(mod_b_fct, rope_range = c(-0.18, 0.18)) %>% 
+  as_tibble() %>% 
+  select(-c("CI", "ROPE_CI", "ROPE_low", "ROPE_high")) %>% 
+  write.csv(here("docs", "tables", "log_pct.csv"))
+
 
 rep_df %>% 
   ggplot(aes(y = condition, x = .value)) + stat_halfeye(fill = "seagreen") + 
