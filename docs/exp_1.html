@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.367">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Task 1 analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+<script src="exp_1_files/libs/clipboard/clipboard.min.js"></script>
+<script src="exp_1_files/libs/quarto-html/quarto.js"></script>
+<script src="exp_1_files/libs/quarto-html/popper.min.js"></script>
+<script src="exp_1_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="exp_1_files/libs/quarto-html/anchor.min.js"></script>
+<link href="exp_1_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link id="quarto-text-highlighting-styles" href="exp_1_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+<script src="exp_1_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="exp_1_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="exp_1_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Task 1 analysis</h1>
+</div>
+
+
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<ol type="1">
+<li>Word Learning - Multiple target frames in a trial You can preview the inanimate-bleached condition of the task here, if you’re interested.</li>
+</ol>
+<p>Procedure: Participants were presented with a set of videos with a dialogue between two speakers featuring a novel word. At the end of each trial, they were asked to provide their guess about the novel word’s meaning, and indicate their confidence level (scale: 1-4). Within each target adjective trial, participants head the target novel adjective across multiple syntactic frames, the combination of which narrowed the hypothesis space of meaning to one particular subgroup of emotion adjectives.</p>
+<p>Guesses were manually coded post-hoc as “adjective” (0: not adjective, 1: adjective) and then further as “emotion adjective” (0: not emotion adjective; 1: emotion adjective) independently by two researchers, with discrepancies between 0 and 1 resolved in consultation.</p>
+<p><strong>Overall, the results suggest that later guesses were more often emotion adjectives and they were rated more highly in all 4 conditions</strong></p>
+</section>
+<section id="statistical-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="statistical-analysis">Statistical Analysis</h2>
+<p>Like experiment 2, a Bayesian multilevel logistic regression was a done in order to determine the <strong>probability of guessing an emotion adjective</strong>. In the model, the fixed effect predictors were animacy condition (2 levels: animate, inanimate), frame condition (2 levels: bleached, lexical). The model also included random intercepts for participant and word to account for the nested structure of the data. All model priors were the default in <code>brms</code>, a student’s T distribution with 3 degree of freedom. All models were fit with 4000 iterations (1000 warm-up). Hamiltonian Monte-Carlo sampling was carried out with 6 chains distributed between 6 processing cores.</p>
+<p><em>Note: I’ve left much of the analysis descriptive and can provide more numbers, tables or models where you see fit.</em></p>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<section id="a-proportion-of-emotion-adjective-guesses-out-of-all-guesses---sum-adj-and-non-adj-guesses" class="level3">
+<h3 class="anchored" data-anchor-id="a-proportion-of-emotion-adjective-guesses-out-of-all-guesses---sum-adj-and-non-adj-guesses">a) proportion of emotion adjective guesses (out of ALL guesses - sum adj and non-adj guesses)**</h3>
+<p>Overall, the majority of guesses were classified as adjectives (93%). Of those, 75% were coded as emotion adjectives.</p>
+<p><strong>Compare guesses for target trials across conditions (look for main effects and interactions)</strong></p>
+<p>The logistic model is summarized in <a href="#tbl-log-model">Table&nbsp;1</a> (this can be included in the body of a paper or the appendix). The specific interpretation of the model output is discussed in the subsequent sections in more detail.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-log-model" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Table 1: Summary of the posterior distribution modeling of the probability of guessing an emotion adjective as a function of animacy and frame The table includes posterior medians, the 95% HDI, the percentage of the HDI within the ROPE, and the maximum probability of effect (MPE).</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: right;">Median</th>
+<th style="text-align: right;">HDI</th>
+<th style="text-align: right;">% in ROPE</th>
+<th style="text-align: right;">MPE</th>
+<th style="text-align: right;">Rhat</th>
+<th style="text-align: left;">ESS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Intercept</td>
+<td style="text-align: right;">1.08</td>
+<td style="text-align: right;">[0.17, 1.55]</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.99</td>
+<td style="text-align: right;">1.04</td>
+<td style="text-align: left;">103</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">animate</td>
+<td style="text-align: right;">-0.74</td>
+<td style="text-align: right;">[-1.00, -0.48]</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: left;">2873</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">lexical</td>
+<td style="text-align: right;">0.21</td>
+<td style="text-align: right;">[-0.06, 0.50]</td>
+<td style="text-align: right;">0.41</td>
+<td style="text-align: right;">0.93</td>
+<td style="text-align: right;">1.01</td>
+<td style="text-align: left;">521</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">animate:lexical</td>
+<td style="text-align: right;">-0.32</td>
+<td style="text-align: right;">[-0.69, 0.04]</td>
+<td style="text-align: right;">0.23</td>
+<td style="text-align: right;">0.96</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: left;">2676</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p><em>Note: This model will need to be re-examined since there were some sampling issues. I suspect that there are some influential data points that make it difficult to model, but need to dig deeper to be sure. The models should be okay for a presentation, but will need to be refined for publication</em></p>
+<p><strong>Did animacy matter?</strong></p>
+<p><em>Similar to task 2</em></p>
+<p>Yes: emotion adjective guesses were highly probable in the animate condition (0.9 HDI [0.57 -1]). Guesses for inanimate adjectives were less likely to be emotion adjectives 0.65 HDI [0.01 -0.53].</p>
+<p><strong>Did frame matter?</strong></p>
+<p><em>Similar to task 2</em></p>
+<p>Not as much. Overall, the was less of a difference in frame (before we consider the interaction). That is, “overall” refers to the pooled estimates of a given frame of both animate and inanimate subjects. The probability of an emotion adjective in the lexical frame was 0.8 HDI [0.04 -0.48]. The probability of an emotion adjective in the bleached frame was 0.74 HDI [0.03 -0.55].</p>
+<p><strong>What did the interaction of animacy and frame look like?</strong></p>
+<p>We do see clear differences in the interaction of animacy and frame. Specifically: The probability of an emotion adjective in the lexical frame with an inanimate subject was 0.72 HDI [0.03 -0.54]. The probability of an emotion adjective in the bleached frame with an inanimate subject was 0.57 HDI [0.01 -0.52]. The probability of an emotion adjective in the lexical frame with an animate subject was 0.89 HDI [0.45 -0.7]. Finally, the probability of an emotion adjective in the bleached frame with an animate subject was 0.91 HDI [0.68 -1].</p>
+<p><strong>We have the same plot options here that I offered for task 2</strong></p>
+<p>We have a few options for plots here. Both plots below show the same information (the posterior distribution of the probability of guessing an emotion adjective), but present with a different fixed effect on the y-axis. In <a href="#fig-ani">Figure&nbsp;1</a>, animacy is on the y-axis. In this plot we can see that the probability of guessing an emotion adjective is very similar in the bleached and lexical frames when the subject is animate. On the other hand, lexical frame does make a difference when the subject is inanimate.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-ani" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="plots/task_1_bayesian.png" class="img-fluid figure-img" width="1127"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 1: The probability of guessing an emotion adjective by animacy and frame</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-frame">Figure&nbsp;2</a> has the frame condition on the y-axis. This shows us that words with animate subjects are more likely to be guessed as emotion adjectives than ones with animate subjects in both lexical and bleached frames. These two plots are derived from the same model, but provide different insights. Depending on which one answers the research question better, we can include it.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-frame" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="plots/task_1_bayesian_frame.png" class="img-fluid figure-img" width="1364"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 2: The probability of guessing an emotion adjective by frame and animacy</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Effect Sizes</strong></p>
+<p>Just as for some previous work, I included an two example effect size plots that plot the difference between the posterior distributions in <a href="#fig-ani">Figure&nbsp;1</a>. <a href="#fig-ani-es-1">Figure&nbsp;3</a> shows all plausible differences in the effect of frame (going from bleached to lexical) in the inanimate condition. The number inside to distribution is the probability of the effect being positive (a 1 indicates that we are 100% sure the effect is positive based on our data). The numbers below the data points are the mean of the the distribution (or the most probable effect size), and the upper and lower bounds of the 95% Highest Density interval (HDI). <a href="#fig-ani-es-2">Figure&nbsp;4</a> shows the same information in the animate condition. In this case, we see that the probability of positive effect is .39, suggesting that we are unsure of the direction of the effect. In other words, we can’t conclude that frame made a difference when the subject was animate. On the other hand, we do see compelling evidence that frame is important when the subject is inanimate.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-ani-es-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="plots/inanimate_es_1.png" class="img-fluid figure-img" width="1364"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 3: A distribution of plausible effect sizes going from bleached to lexical frames when the subject in inanimate</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-ani-es-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="plots/animate_es_1.png" class="img-fluid figure-img" width="1364"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 4: A distribution of plausible effect sizes going from bleached to lexical frames when the subject in animate</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>ALL GUESSES - Compare 1st guess for target trials across conditions</strong></p>
+<p>We can see in <a href="#fig-ratings">Figure&nbsp;5</a> that the proportion of emotion adjective guesses was very low in all 4 conditions at first guess.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-ratings" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="plots/prop_em.png" class="img-fluid figure-img" width="1127"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 5: A comparison of the ratings of the first trial by condition</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>ALL GUESSES - Compare 2nd and 4th guesses for target trials across conditions (increase in emotion adj guesses?</strong></p>
+<p>However, <a href="#fig-ratings-guess">Figure&nbsp;6</a> shows that the proportion of emotion adjective guesses increase in all 4 conditions as a function of guess.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-ratings-guess" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="plots/task-1-rating-guess-1.png" class="img-fluid figure-img" width="1050"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 6: A comparison of the ratings of the first trial by condition</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="b-proportion-of-emotion-adjective-guesses-out-of-all-adj-guesses" class="level3">
+<h3 class="anchored" data-anchor-id="b-proportion-of-emotion-adjective-guesses-out-of-all-adj-guesses">b) proportion of emotion adjective guesses (out of all ADJ guesses)**</h3>
+<p><strong>Compare guesses for target trials across conditions (look for main effects and interactions)</strong></p>
+<p>Do we want to run another model for this? It seems less cluttered to me to run a logistic regression for one or the other (the probability of an emotion adjective out of either all guesses or adjective guesses).</p>
+<p><strong>Compare 1st guess for target trials across conditions</strong> Again we see in <a href="#fig-ratings-guess-adj">Figure&nbsp;7</a> that the proportion for emotion adjective guesses was low in all conditions. Bleached/animate was the only condition that had any emotion adjective guesses.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-ratings-guess-adj" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="plots/prop_em_adj.png" class="img-fluid figure-img" width="1127"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 7: 1st guess for target trials across conditionsn</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Compare 2nd and 4th guesses for target trials across conditions (increase in emotion adj guesses?)</strong></p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-ratings-adj" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="plots/task-1-rating-guess-1-adj.png" class="img-fluid figure-img" width="1050"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 8: A comparison of the ratings of the first trial by condition</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="c-confidence-level-1-4" class="level3">
+<h3 class="anchored" data-anchor-id="c-confidence-level-1-4">c) confidence level (1-4)</h3>
+<p><strong>Compare final confidence rating for target trials across conditions</strong></p>
+<p><a href="#fig-condifence-4-1">Figure&nbsp;9</a> shows the distributions of ratings as a by condition for the final guess. 2 was the most common rating in each case.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-condifence-4-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="plots/confidence-4-1.png" class="img-fluid figure-img" width="1050"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 9: A comparison of the ratings of the condifence of the final guess by condition</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Compare first to last guess for target trials across conditions (increase in confidence?)</strong></p>
+<p><a href="#fig-condifence-comp">Figure&nbsp;10</a> shows that the mean confidence rating increased in all 4 conditions from guess 1 to guess 4.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-condifence-comp" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="plots/confidence-comp.png" class="img-fluid figure-img" width="1127"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 10: A comparison of the mean confidence ratings by condition during guess 1 and guess 4</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

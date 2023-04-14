@@ -9,4 +9,7 @@ I'll update the links as we make adjustments.
 
 #### Experiment list
 
+[Experiment 1](docs/exp_1.html)
+
 [Experiment 2](docs/exp_2.html)
+

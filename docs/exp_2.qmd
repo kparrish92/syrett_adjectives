@@ -115,11 +115,8 @@ knitr::include_graphics(here("docs", "plots", "ratings_mod.png"))
 
 ### Within subjects Frame-type
 
-@fig-ws-plot-mod shows the probability of guessing an emotion adjective in each of the 4 conditons for a 6 frame types.
-The shades of blue are animate conditions, while the red shades are inanimate conditions. 
-Overall, animate conditions had a higher probability of being guessed as an emotion adjective than inanimate conditions.  
-Additionally, in five out of seven cases, animate subjects in the lexical frame produced the highest probability of guessing an emotion adjective.
-In the remaining two ("to VP" and "about DP"), the animate-bleached condition was the condition in which an emotion adjective guess was the highest. 
+@fig-ws-plot-mod shows the probability of guessing an emotion adjective in each of the 4 conditons for a 6 frame types. The shades of blue are animate conditions, while the red shades are inanimate conditions. Overall, animate conditions had a higher probability of being guessed as an emotion adjective than inanimate conditions.\
+Additionally, in five out of seven cases, animate subjects in the lexical frame produced the highest probability of guessing an emotion adjective. In the remaining two ("to VP" and "about DP"), the animate-bleached condition was the condition in which an emotion adjective guess was the highest.
 
 ```{r}
 #| label: fig-ws-plot-mod

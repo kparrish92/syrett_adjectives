@@ -1,0 +1,182 @@
+---
+title: "Task 1 analysis"
+format: html
+editor: visual
+---
+
+```{r, include = FALSE}
+library(here)
+library(tidyverse)
+library(janitor)
+library(bayestestR)
+library(bayesplot)
+library(tidybayes)
+library(modelr)
+library(brms)
+
+knitr::opts_chunk$set(echo = FALSE)
+
+source(here::here("scripts", "task_2", "03_load_data.R"))
+```
+
+## Overview
+
+1) Word Learning - Multiple target frames in a trial
+You can preview the inanimate-bleached condition of the task here, if you're interested.
+
+Procedure: 
+Participants were presented with a set of videos with a dialogue between two speakers featuring a novel word. At the end of each trial, they were asked to provide their guess about the novel word's meaning, and indicate their confidence level (scale: 1-4). Within each target adjective trial, participants head the target novel adjective across multiple syntactic frames, the combination of which narrowed the hypothesis space of meaning to one particular subgroup of emotion adjectives.
+ 
+Guesses were manually coded post-hoc as "adjective" (0: not adjective, 1: adjective) and then further as "emotion adjective" (0: not emotion adjective; 1: emotion adjective) independently by two researchers, with discrepancies between 0 and 1 resolved in consultation. 
+
+**Overall, the results suggest that later guesses were more often emotion adjectives and they were rated more highly in all 4 conditions**
+
+## Statistical Analysis
+
+Like experiment 2, a Bayesian multilevel logistic regression was a done in order to determine the **probability of guessing an emotion adjective**. In the model, the fixed effect predictors were animacy condition (2 levels: animate, inanimate), frame condition (2 levels: bleached, lexical). 
+The model also included random intercepts for participant and word to account for the nested structure of the data.
+All model priors were the default in `brms`, a student's T distribution with 3 degree of freedom. All models were fit with 4000 iterations (1000 warm-up). Hamiltonian Monte-Carlo sampling was carried out with 6 chains distributed between 6 processing cores.
+
+*Note: I've left much of the analysis descriptive and can provide more numbers, tables or models where you see fit.*
+
+## Results
+
+### a) proportion of emotion adjective guesses (out of ALL guesses - sum adj and non-adj guesses)**
+
+Overall, the majority of guesses were classified as adjectives (`r round(total_adjective_guesses, digits = 2)*100`%). Of those, `r round(prop_emotional, digits = 2)*100`% were coded as emotion adjectives.
+
+
+**Compare guesses for target trials across conditions (look for main effects and interactions)**
+
+The logistic model is summarized in @tbl-log-model (this can be included in the body of a paper or the appendix). The specific interpretation of the model output is discussed in the subsequent sections in more detail. 
+
+```{r}
+#| label: tbl-log-model
+#| tbl-cap: "Summary of the posterior distribution modeling of the probability of guessing an emotion adjective as a function of animacy and frame The table includes posterior medians, the 95% HDI, the percentage of the HDI within the ROPE, and the maximum probability of effect (MPE)."
+
+read_csv(here("docs", "tables", "study_1_model.csv"), col_types = cols(.default = "c")) %>% 
+  knitr::kable(format = "pandoc", align = c("l", "r", "r", "r", "r", "r"),
+    label = "study2-mod-log")
+```
+
+
+*Note: This model will need to be re-examined since there were some sampling issues. I suspect that there are some influential data points that make it difficult to model, but need to dig deeper to be sure. The models should be okay for a presentation, but will need to be refined for publication*
+
+**Did animacy matter?**
+
+*Similar to task 2*
+
+Yes: emotion adjective guesses were highly probable in the animate condition (`r round(mean(a_df$.value), digits = 2)` HDI \[`r round(hdi(a_df$.value), digits = 2)[1]` -`r round(hdi(a_df$.value), digits = 2)[2]`\]). Guesses for inanimate adjectives were less likely to be emotion adjectives `r round(mean(ia_df$.value), digits = 2)` HDI \[`r round(hdi(ia_df$.value), digits = 2)[1]` -`r round(hdi(ia_df$.value), digits = 2)[2]`\].
+
+**Did frame matter?**
+
+*Similar to task 2*
+
+Not as much. Overall, the was less of a difference in frame (before we consider the interaction). That is, "overall" refers to the pooled estimates of a given frame of both animate and inanimate subjects. The probability of an emotion adjective in the lexical frame was `r round(mean(l_df$.value), digits = 2)` HDI \[`r round(hdi(l_df$.value), digits = 2)[1]` -`r round(hdi(l_df$.value), digits = 2)[2]`\]. The probability of an emotion adjective in the bleached frame was `r round(mean(b_df$.value), digits = 2)` HDI \[`r round(hdi(b_df$.value), digits = 2)[1]` -`r round(hdi(b_df$.value), digits = 2)[2]`\].
+
+
+**What did the interaction of animacy and frame look like?**
+
+We do see clear differences in the interaction of animacy and frame. Specifically: The probability of an emotion adjective in the lexical frame with an inanimate subject was `r round(mean(il_df$.value), digits = 2)` HDI \[`r round(hdi(il_df$.value), digits = 2)[1]` -`r round(hdi(il_df$.value), digits = 2)[2]`\]. The probability of an emotion adjective in the bleached frame with an inanimate subject was `r round(mean(ib_df$.value), digits = 2)` HDI \[`r round(hdi(ib_df$.value), digits = 2)[1]` -`r round(hdi(ib_df$.value), digits = 2)[2]`\]. The probability of an emotion adjective in the lexical frame with an animate subject was `r round(mean(al_df$.value), digits = 2)` HDI \[`r round(hdi(al_df$.value), digits = 2)[1]` -`r round(hdi(al_df$.value), digits = 2)[2]`\]. Finally, the probability of an emotion adjective in the bleached frame with an animate subject was `r round(mean(ab_df$.value), digits = 2)` HDI \[`r round(hdi(ab_df$.value), digits = 2)[1]` -`r round(hdi(ab_df$.value), digits = 2)[2]`\].
+
+**We have the same plot options here that I offered for task 2**
+
+We have a few options for plots here. Both plots below show the same information (the posterior distribution of the probability of guessing an emotion adjective), but present with a different fixed effect on the y-axis. In @fig-ani, animacy is on the y-axis. In this plot we can see that the probability of guessing an emotion adjective is very similar in the bleached and lexical frames when the subject is animate. On the other hand, lexical frame does make a difference when the subject is inanimate.
+
+```{r}
+#| label: fig-ani
+#| fig-cap: "The probability of guessing an emotion adjective by animacy and frame"
+knitr::include_graphics(here("docs", "plots", "task_1_bayesian.png"))
+```
+
+@fig-frame has the frame condition on the y-axis. This shows us that words with animate subjects are more likely to be guessed as emotion adjectives than ones with animate subjects in both lexical and bleached frames. These two plots are derived from the same model, but provide different insights. Depending on which one answers the research question better, we can include it.
+
+```{r}
+#| label: fig-frame
+#| fig-cap: "The probability of guessing an emotion adjective by frame and animacy"
+knitr::include_graphics(here("docs", "plots", "task_1_bayesian_frame.png"))
+```
+
+**Effect Sizes**
+
+Just as for some previous work, I included an two example effect size plots that plot the difference between the posterior distributions in @fig-ani. @fig-ani-es-1 shows all plausible differences in the effect of frame (going from bleached to lexical) in the inanimate condition. The number inside to distribution is the probability of the effect being positive (a 1 indicates that we are 100% sure the effect is positive based on our data). The numbers below the data points are the mean of the the distribution (or the most probable effect size), and the upper and lower bounds of the 95% Highest Density interval (HDI). @fig-ani-es-2 shows the same information in the animate condition. In this case, we see that the probability of positive effect is .39, suggesting that we are unsure of the direction of the effect. In other words, we can't conclude that frame made a difference when the subject was animate. On the other hand, we do see compelling evidence that frame is important when the subject is inanimate.
+
+```{r}
+#| label: fig-ani-es-1
+#| fig-cap: "A distribution of plausible effect sizes going from bleached to lexical frames when the subject in inanimate"
+knitr::include_graphics(here("docs", "plots", "inanimate_es_1.png"))
+```
+
+```{r}
+#| label: fig-ani-es-2
+#| fig-cap: "A distribution of plausible effect sizes going from bleached to lexical frames when the subject in animate"
+knitr::include_graphics(here("docs", "plots", "animate_es_1.png"))
+```
+
+**ALL GUESSES - Compare 1st guess for target trials across conditions** 
+
+We can see in @fig-ratings that the proportion of emotion adjective guesses was very low in all 4 conditions at first guess. 
+
+```{r}
+#| label: fig-ratings
+#| fig-cap: "A comparison of the ratings of the first trial by condition"
+knitr::include_graphics(here("docs", "plots", "prop_em.png"))
+```
+
+**ALL GUESSES - Compare 2nd and 4th guesses for target trials across conditions (increase in emotion adj guesses?**
+
+However, @fig-ratings-guess shows that the proportion of emotion adjective guesses increase in all 4 conditions as a function of guess.
+
+```{r}
+#| label: fig-ratings-guess
+#| fig-cap: "A comparison of the ratings of the first trial by condition"
+knitr::include_graphics(here("docs", "plots", "task-1-rating-guess-1.png"))
+```
+
+### b) proportion of emotion adjective guesses (out of all ADJ guesses)**
+
+**Compare guesses for target trials across conditions (look for main effects and interactions)**
+
+Do we want to run another model for this? It seems less cluttered to me to run a logistic regression for one or the other (the probability of an emotion adjective out of either all guesses or adjective guesses).
+
+**Compare 1st guess for target trials across conditions** 
+Again we see in @fig-ratings-guess-adj that the proportion for emotion adjective guesses was low in all conditions. 
+Bleached/animate was the only condition that had any emotion adjective guesses.
+
+```{r}
+#| label: fig-ratings-guess-adj
+#| fig-cap: "1st guess for target trials across conditionsn"
+knitr::include_graphics(here("docs", "plots", "prop_em_adj.png"))
+```
+
+**Compare 2nd and 4th guesses for target trials across conditions (increase in emotion adj guesses?)**
+
+```{r}
+#| label: fig-ratings-adj
+#| fig-cap: "A comparison of the ratings of the first trial by condition"
+knitr::include_graphics(here("docs", "plots", "task-1-rating-guess-1-adj.png"))
+```
+
+
+### c)  confidence level (1-4) 
+
+**Compare final confidence rating for target trials across conditions** 
+
+@fig-condifence-4-1 shows the distributions of ratings as a by condition for the final guess.
+2 was the most common rating in each case.
+
+```{r}
+#| label: fig-condifence-4-1
+#| fig-cap: "A comparison of the ratings of the condifence of the final guess by condition"
+knitr::include_graphics(here("docs", "plots", "confidence-4-1.png"))
+```
+
+**Compare first to last guess for target trials across conditions (increase in confidence?)**
+
+@fig-condifence-comp shows that the mean confidence rating increased in all 4 conditions from guess 1 to guess 4.
+
+```{r}
+#| label: fig-condifence-comp
+#| fig-cap: "A comparison of the mean confidence ratings by condition during guess 1 and guess 4"
+knitr::include_graphics(here("docs", "plots", "confidence-comp.png"))
+```
