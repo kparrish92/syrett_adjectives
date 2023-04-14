@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.367">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Experiment 3</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+<script src="exp_3_files/libs/clipboard/clipboard.min.js"></script>
+<script src="exp_3_files/libs/quarto-html/quarto.js"></script>
+<script src="exp_3_files/libs/quarto-html/popper.min.js"></script>
+<script src="exp_3_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="exp_3_files/libs/quarto-html/anchor.min.js"></script>
+<link href="exp_3_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link id="quarto-text-highlighting-styles" href="exp_3_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+<script src="exp_3_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="exp_3_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="exp_3_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Experiment 3</h1>
+</div>
+
+
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<ol start="3" type="1">
+<li>Forced Choice Referent Selection You can preview the current version of the task here, if you’re interested. (We’ll be running two follow-up versions, manipulating the lexical prompt before the test phase.)</li>
+</ol>
+<p>Task: Participants were presented with a brief video featuring a target novel word, then asked to use this information to make a selection between two referents at test. Only 1 condition run (so far).</p>
+</section>
+<section id="statistical-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="statistical-analysis">Statistical Analysis</h2>
+<p>In order to find the probability of choosing an animate referent, a binomial logistic regression was run. The fixed effect predictor was condition (8 levels: blickets (count N), daxy-about DP, wilpy-of…because, spoovy-that, troby-about gerund, brispy-at…because, larpy-to VP, roaking (transitive). All model priors were the default in <code>brms</code>, a student’s T distribution with 3 degree of freedom. All models were fit with 4000 iterations (1000 warm-up). Hamiltonian Monte-Carlo sampling was carried out with 6 chains distributed between 6 processing cores</p>
+<p><strong>-compare each target adjective trial to chance level (chance=.5, likeliness to guess emot. adj)</strong></p>
+<p><a href="#fig-ind">Figure&nbsp;1</a> shows the probability of choosing an animate referent in each condition. Almost every condition is reliably choosing the animate referent above chance.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-ind" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="plots/ind_prob.png" class="img-fluid figure-img" width="1127"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 1: Individual probability of choosing the animate referent</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>-compare target trials in aggregate to chance level (chance=.5, likeliness to guess emot. adj)</strong></p>
+<p><a href="#fig-agg">Figure&nbsp;2</a> shows the aggregate of these individual estimates. Overall, the probability of choosing the animate referent was .78 [95% HDI .72-.84].</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-agg" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="plots/aggregate_prob.png" class="img-fluid figure-img" width="1127"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 2: Aggregate probability of choosing the animate referent</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>-compare across target adjective trials (Chi-sq, more restrictive/informative frames?)</strong></p>
+<p>I am unsure about this - How is it different from 1?</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

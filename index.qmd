@@ -13,3 +13,5 @@ I'll update the links as we make adjustments.
 
 [Experiment 2](docs/exp_2.html)
 
+[Experiment 3](docs/exp_3.html)
+

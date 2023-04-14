@@ -21,34 +21,29 @@ source(here::here("scripts", "task_2", "03_load_data.R"))
 
 ## Overview
 
-1) Word Learning - Multiple target frames in a trial
-You can preview the inanimate-bleached condition of the task here, if you're interested.
+1)  Word Learning - Multiple target frames in a trial You can preview the inanimate-bleached condition of the task here, if you're interested.
 
-Procedure: 
-Participants were presented with a set of videos with a dialogue between two speakers featuring a novel word. At the end of each trial, they were asked to provide their guess about the novel word's meaning, and indicate their confidence level (scale: 1-4). Within each target adjective trial, participants head the target novel adjective across multiple syntactic frames, the combination of which narrowed the hypothesis space of meaning to one particular subgroup of emotion adjectives.
- 
-Guesses were manually coded post-hoc as "adjective" (0: not adjective, 1: adjective) and then further as "emotion adjective" (0: not emotion adjective; 1: emotion adjective) independently by two researchers, with discrepancies between 0 and 1 resolved in consultation. 
+Procedure: Participants were presented with a set of videos with a dialogue between two speakers featuring a novel word. At the end of each trial, they were asked to provide their guess about the novel word's meaning, and indicate their confidence level (scale: 1-4). Within each target adjective trial, participants head the target novel adjective across multiple syntactic frames, the combination of which narrowed the hypothesis space of meaning to one particular subgroup of emotion adjectives.
+
+Guesses were manually coded post-hoc as "adjective" (0: not adjective, 1: adjective) and then further as "emotion adjective" (0: not emotion adjective; 1: emotion adjective) independently by two researchers, with discrepancies between 0 and 1 resolved in consultation.
 
 **Overall, the results suggest that later guesses were more often emotion adjectives and they were rated more highly in all 4 conditions**
 
 ## Statistical Analysis
 
-Like experiment 2, a Bayesian multilevel logistic regression was a done in order to determine the **probability of guessing an emotion adjective**. In the model, the fixed effect predictors were animacy condition (2 levels: animate, inanimate), frame condition (2 levels: bleached, lexical). 
-The model also included random intercepts for participant and word to account for the nested structure of the data.
-All model priors were the default in `brms`, a student's T distribution with 3 degree of freedom. All models were fit with 4000 iterations (1000 warm-up). Hamiltonian Monte-Carlo sampling was carried out with 6 chains distributed between 6 processing cores.
+Like experiment 2, a Bayesian multilevel logistic regression was a done in order to determine the **probability of guessing an emotion adjective**. In the model, the fixed effect predictors were animacy condition (2 levels: animate, inanimate), frame condition (2 levels: bleached, lexical). The model also included random intercepts for participant and word to account for the nested structure of the data. All model priors were the default in `brms`, a student's T distribution with 3 degree of freedom. All models were fit with 4000 iterations (1000 warm-up). Hamiltonian Monte-Carlo sampling was carried out with 6 chains distributed between 6 processing cores.
 
 *Note: I've left much of the analysis descriptive and can provide more numbers, tables or models where you see fit.*
 
 ## Results
 
-### a) proportion of emotion adjective guesses (out of ALL guesses - sum adj and non-adj guesses)**
+### a) proportion of emotion adjective guesses (out of ALL guesses - sum adj and non-adj guesses)\*\*
 
 Overall, the majority of guesses were classified as adjectives (`r round(total_adjective_guesses, digits = 2)*100`%). Of those, `r round(prop_emotional, digits = 2)*100`% were coded as emotion adjectives.
 
-
 **Compare guesses for target trials across conditions (look for main effects and interactions)**
 
-The logistic model is summarized in @tbl-log-model (this can be included in the body of a paper or the appendix). The specific interpretation of the model output is discussed in the subsequent sections in more detail. 
+The logistic model is summarized in @tbl-log-model (this can be included in the body of a paper or the appendix). The specific interpretation of the model output is discussed in the subsequent sections in more detail.
 
 ```{r}
 #| label: tbl-log-model
@@ -58,7 +53,6 @@ read_csv(here("docs", "tables", "study_1_model.csv"), col_types = cols(.default 
   knitr::kable(format = "pandoc", align = c("l", "r", "r", "r", "r", "r"),
     label = "study2-mod-log")
 ```
-
 
 *Note: This model will need to be re-examined since there were some sampling issues. I suspect that there are some influential data points that make it difficult to model, but need to dig deeper to be sure. The models should be okay for a presentation, but will need to be refined for publication*
 
@@ -73,7 +67,6 @@ Yes: emotion adjective guesses were highly probable in the animate condition (`r
 *Similar to task 2*
 
 Not as much. Overall, the was less of a difference in frame (before we consider the interaction). That is, "overall" refers to the pooled estimates of a given frame of both animate and inanimate subjects. The probability of an emotion adjective in the lexical frame was `r round(mean(l_df$.value), digits = 2)` HDI \[`r round(hdi(l_df$.value), digits = 2)[1]` -`r round(hdi(l_df$.value), digits = 2)[2]`\]. The probability of an emotion adjective in the bleached frame was `r round(mean(b_df$.value), digits = 2)` HDI \[`r round(hdi(b_df$.value), digits = 2)[1]` -`r round(hdi(b_df$.value), digits = 2)[2]`\].
-
 
 **What did the interaction of animacy and frame look like?**
 
@@ -113,9 +106,9 @@ knitr::include_graphics(here("docs", "plots", "inanimate_es_1.png"))
 knitr::include_graphics(here("docs", "plots", "animate_es_1.png"))
 ```
 
-**ALL GUESSES - Compare 1st guess for target trials across conditions** 
+**ALL GUESSES - Compare 1st guess for target trials across conditions**
 
-We can see in @fig-ratings that the proportion of emotion adjective guesses was very low in all 4 conditions at first guess. 
+We can see in @fig-ratings that the proportion of emotion adjective guesses was very low in all 4 conditions at first guess.
 
 ```{r}
 #| label: fig-ratings
@@ -133,15 +126,13 @@ However, @fig-ratings-guess shows that the proportion of emotion adjective guess
 knitr::include_graphics(here("docs", "plots", "task-1-rating-guess-1.png"))
 ```
 
-### b) proportion of emotion adjective guesses (out of all ADJ guesses)**
+### b) proportion of emotion adjective guesses (out of all ADJ guesses)\*\*
 
 **Compare guesses for target trials across conditions (look for main effects and interactions)**
 
 Do we want to run another model for this? It seems less cluttered to me to run a logistic regression for one or the other (the probability of an emotion adjective out of either all guesses or adjective guesses).
 
-**Compare 1st guess for target trials across conditions** 
-Again we see in @fig-ratings-guess-adj that the proportion for emotion adjective guesses was low in all conditions. 
-Bleached/animate was the only condition that had any emotion adjective guesses.
+**Compare 1st guess for target trials across conditions** Again we see in @fig-ratings-guess-adj that the proportion for emotion adjective guesses was low in all conditions. Bleached/animate was the only condition that had any emotion adjective guesses.
 
 ```{r}
 #| label: fig-ratings-guess-adj
@@ -157,13 +148,11 @@ knitr::include_graphics(here("docs", "plots", "prop_em_adj.png"))
 knitr::include_graphics(here("docs", "plots", "task-1-rating-guess-1-adj.png"))
 ```
 
+### c) confidence level (1-4)
 
-### c)  confidence level (1-4) 
+**Compare final confidence rating for target trials across conditions**
 
-**Compare final confidence rating for target trials across conditions** 
-
-@fig-condifence-4-1 shows the distributions of ratings as a by condition for the final guess.
-2 was the most common rating in each case.
+@fig-condifence-4-1 shows the distributions of ratings as a by condition for the final guess. 2 was the most common rating in each case.
 
 ```{r}
 #| label: fig-condifence-4-1
