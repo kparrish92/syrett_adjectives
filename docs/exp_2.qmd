@@ -86,6 +86,13 @@ knitr::include_graphics(here("docs", "plots", "inanimate_es.png"))
 knitr::include_graphics(here("docs", "plots", "animate_es.png"))
 ```
 
+```{r}
+#| layout-ncol: 2
+
+knitr::include_graphics(here("docs", "plots", "inanimate_es.png"))
+knitr::include_graphics(here("docs", "plots", "animate_es.png"))
+```
+
 ### Ratings
 
 Overall, subjects were not highly confident in their guesses. @fig-hist shows that 2 was chosen most often overall, where 4 was scarcely chosen at all. The ordinal model is summarized in @tbl-rating-mod, and the converted to probability and visualized in @fig-rat-mod
@@ -111,6 +118,17 @@ read_csv(here("docs", "tables", "study_2_model_ord.csv"), col_types = cols(.defa
 #| label: fig-rat-mod
 #| fig-cap: "The posterior distribution of the ordinal model"
 knitr::include_graphics(here("docs", "plots", "ratings_mod.png"))
+```
+
+#### Reporting table for ratings 
+
+I am including (adjusted) estimates derived from the model here, in which the each estimate represents the mean of the posterior distribution and is a probability. There should be reported with with estimate and 95% HDI, found in the following columns. 
+
+```{r}
+#| tbl-cap: "Adjusted Estimates of the Ordinal Model"
+ord_report %>% 
+  dplyr::select(-X) %>% 
+  knitr::kable(format = "pandoc")
 ```
 
 ### Within subjects Frame-type

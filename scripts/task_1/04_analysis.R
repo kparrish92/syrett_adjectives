@@ -20,3 +20,19 @@ mod_b_1 = brm(as.numeric(answers) ~ animacy_condtion*frame_content_condition + (
 #    family = cumulative(),
 #    cores = 4,
 #    file = here("data", "models", "study_2_b_ratings.RDS"))
+
+
+### FREQ MOD 
+
+
+### LOG MOD
+
+
+
+full_mod = lme4::glmer(as.numeric(answers) ~ animacy_condtion*frame_content_condition + (1 | word_col) + (1 | prolific_id), 
+                       family = binomial(link = "logit"), 
+                       data = em_adj_df)
+
+full_mod = lme4::glmer(as.numeric(answers) ~ animacy_condtion*frame_content_condition + (1 | word_col) + (1 | prolific_id), 
+              family = binomial(link = "logit"), 
+              data = em_adj_df)

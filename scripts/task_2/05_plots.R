@@ -194,6 +194,11 @@ rating_draws = em_adj_df_ratings %>%
 
 
 rating_draws %>%
+  group_by(animacy_condtion,frame_content_condition, Confidence) %>% 
+  summarise(estimate = round(mean(.value), digits = 2), hdi = round(hdi(.value), digits = 2)) %>% 
+  write.csv(here("data", "tidy", "ord_report.csv"))
+
+rating_draws %>%
   ggplot(aes(y = frame_content_condition, x = .value, fill = Confidence)) +
   stat_halfeye(alpha = .5) +
   scale_size_continuous(guide = "none") +

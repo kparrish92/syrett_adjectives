@@ -1,0 +1,17 @@
+"","animacy_condtion","frame_content_condition","Confidence","estimate","hdi.CI","hdi.CI_low","hdi.CI_high"
+"1","animate","bleached","1",0.28,0.95,0.22,0.33
+"2","animate","bleached","2",0.45,0.95,0.41,0.49
+"3","animate","bleached","3",0.23,0.95,0.18,0.27
+"4","animate","bleached","4",0.04,0.95,0.03,0.06
+"5","animate","lexical","1",0.17,0.95,0.13,0.21
+"6","animate","lexical","2",0.42,0.95,0.37,0.46
+"7","animate","lexical","3",0.34,0.95,0.28,0.39
+"8","animate","lexical","4",0.08,0.95,0.05,0.11
+"9","inanimate","bleached","1",0.52,0.95,0.44,0.60
+"10","inanimate","bleached","2",0.36,0.95,0.31,0.42
+"11","inanimate","bleached","3",0.10,0.95,0.07,0.14
+"12","inanimate","bleached","4",0.02,0.95,0.01,0.02
+"13","inanimate","lexical","1",0.38,0.95,0.30,0.44
+"14","inanimate","lexical","2",0.43,0.95,0.39,0.47
+"15","inanimate","lexical","3",0.16,0.95,0.12,0.21
+"16","inanimate","lexical","4",0.03,0.95,0.02,0.04
