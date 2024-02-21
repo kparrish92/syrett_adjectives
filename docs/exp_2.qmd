@@ -120,9 +120,9 @@ read_csv(here("docs", "tables", "study_2_model_ord.csv"), col_types = cols(.defa
 knitr::include_graphics(here("docs", "plots", "ratings_mod.png"))
 ```
 
-#### Reporting table for ratings 
+#### Reporting table for ratings
 
-I am including (adjusted) estimates derived from the model here, in which the each estimate represents the mean of the posterior distribution and is a probability. There should be reported with with estimate and 95% HDI, found in the following columns. 
+I am including (adjusted) estimates derived from the model here, in which the each estimate represents the mean of the posterior distribution and is a probability. There should be reported with with estimate and 95% HDI, found in the following columns.
 
 ```{r}
 #| tbl-cap: "Adjusted Estimates of the Ordinal Model"

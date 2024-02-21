@@ -20,7 +20,9 @@ brm(as.integer(Confidence) ~ animacy_condtion*frame_content_condition,
 ### within-subj mod
 
 brm(as.numeric(answers) ~ word_col*animacy_condtion*frame_content_condition + 
-            (1 | prolific_id), family = bernoulli(link = "logit"), data = em_adj_df, 
+            (1 | prolific_id), 
+#    iter = 4000,
+    family = bernoulli(link = "logit"), data = em_adj_df,
           file = here("data", "models", "ws_model-3.RDS"))
 
 
@@ -71,9 +73,6 @@ int_mod = lme4::glmer(as.numeric(answers) ~ animacy_condtion + frame_content_con
 
 res_df = anova(null_mod, ac_mod, fc_mod, int_mod) %>% 
   write.csv(here("data", "tidy", "task_3_nmc.csv"))
-
-library(brglm2)
-library(multcomp)
 
 
 #(X(df) = Chisq; p < value)

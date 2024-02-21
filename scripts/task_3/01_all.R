@@ -52,7 +52,7 @@ hdi(mod_b_df$aggregate_prob), digits = 2)
 round(hdi(mod_b_df$aggregate_prob), digits = 2)[1]
 round(hdi(mod_b_df$aggregate_prob), digits = 2)[2]
 
-plogis(mod_b_df 
+plogis(mod_b_df)
 
 rep_df = fct %>%
   data_grid(condition) %>%

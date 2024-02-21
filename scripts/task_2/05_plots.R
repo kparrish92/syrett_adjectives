@@ -24,6 +24,8 @@ round(hdi(a_df$.value), digits = 2)[1] # hdi lo for animate
 round(hdi(a_df$.value), digits = 2)[2] # hdi hi for animate
 
 
+
+
 ## Forest Plot
 em_adj_df %>%
   data_grid(animacy_condtion,frame_content_condition) %>%

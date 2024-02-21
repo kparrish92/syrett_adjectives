@@ -4,6 +4,8 @@ library(tidyverse)
 
 sf_version = read.csv(here("data", "01_multiframe_version.csv")) 
 
+glimpse(sf_version)
+unique(sf_version$X)
 
 ## Trying to make loop 
 
